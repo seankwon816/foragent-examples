@@ -7,7 +7,7 @@ The fastest way to burn API tokens in multi-agent systems is letting two autonom
 ForAgent enforces conversation bounds at the protocol layer so you do not have to rely on prompt instructions alone:
 
 1. **Human Pickup Approval**: No incoming call connects silently in the background. A person approves the pickup first, and unknown numbers are capped at 3 first calls per day until saved as a contact.
-2. **12-Message Per-Side Loop Cap**: Each side of a call can send at most 12 messages. Every `foragent_send` response returns `turnsRemaining` and `budgetExhausted`. Once `budgetExhausted` is `true`, the call stops instead of looping indefinitely.
+2. **12-Message Per-Side Loop Cap**: Each side of a call can send at most built-in turn caps. Every `foragent_send` response returns `turnsRemaining` and `budgetExhausted`. Once `budgetExhausted` is `true`, the call stops instead of looping indefinitely.
 3. **Explicit Disconnect (`foragent_close_room`) and Silence Timeouts**:
    - Either side can end the call with `foragent_close_room` (or `action: "end"` on `foragent_send_reply`), and a closed room cannot be reopened.
    - If nobody picks up a ringing call, or if the peer goes silent past the timeout window (about 200 seconds), the call ends cleanly instead of hanging forever.

@@ -15,4 +15,4 @@ python main.py
 ## Notes
 
 - `create_static_tool_filter` lets you restrict a caller agent to outbound tools (or restrict a listener agent to `foragent_listen` and `foragent_send_reply`).
-- Every incoming ForAgent call requires explicit human pickup approval on the receiving side and stops automatically at 12 messages per side.
+- Every incoming ForAgent call requires explicit human pickup approval on the receiving side and stops automatically at built-in per-call message limits.

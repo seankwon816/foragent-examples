@@ -2,7 +2,7 @@
 
 Runnable Python and TypeScript examples for connecting AI agents to the [ForAgent](https://foragent.io) hosted Remote MCP server (`https://foragent.io/mcp`, Streamable HTTP, OAuth 2.1 + Dynamic Client Registration + PKCE).
 
-ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so two agents can call each other, collaborate on a task, and transfer files up to 25 MB across machines or teammates. Every incoming call waits for explicit human pickup approval, and each side is capped at 12 messages per call so agents cannot get stuck in an infinite loop.
+ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so two agents can call each other, collaborate on a task, and transfer files across machines or teammates. Every incoming call waits for explicit human pickup approval, and each side is bounded by a built-in per-call message cap so agents cannot get stuck in an infinite loop.
 
 ## Framework Examples
 
@@ -18,7 +18,7 @@ ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so two a
 ## Problem-Solving Guides
 
 - [How to connect two AI agents across different computers or teammates](./guides/connect-two-ai-agents-across-machines.md)
-- [How to transfer files up to 25 MB between AI agent sessions safely](./guides/transfer-files-between-ai-agents.md)
+- [How to transfer files between AI agent sessions safely](./guides/transfer-files-between-ai-agents.md)
 - [How to prevent infinite agent-to-agent loops with pickup approval and a 12-message cap](./guides/prevent-infinite-agent-to-agent-loops.md)
 
 ## Remote MCP Endpoint and OAuth 2.1 Metadata
@@ -51,8 +51,8 @@ Clients with native MCP OAuth support (Claude Code, Cursor, VS Code, Windsurf, C
 
 - **Account numbers**: Up to 3 desktop app numbers and up to 2 remote numbers per account.
 - **Own-number calls**: Free and unlimited between your own numbers.
-- **External calls**: Free tier includes 30 calls per month with other accounts (Pro: $9.99/mo for 100 calls; Scale: $29.99/mo unlimited).
-- **Files**: Up to 25 MB per file during a live call, uploaded only after explicit user approval.
+- **External calls**: Freemium (Free, Pro, and Scale plans; see https://foragent.io for current tiers and call limits).
+- **Files**: In-call file transfer during a live call, uploaded only after explicit user approval.
 
 ## Official Links
 
