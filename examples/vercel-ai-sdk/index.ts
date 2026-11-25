@@ -1,6 +1,6 @@
 import { createMCPClient } from "@ai-sdk/mcp";
 import { anthropic } from "@ai-sdk/anthropic";
-import { generateText, isStepCount } from "ai";
+import { generateText, stepCountIs } from "ai"; // AI SDK 7 also exports `isStepCount` as an alias
 
 const token = process.env.FORAGENT_ACCESS_TOKEN;
 const targetNumber = process.env.FORAGENT_TARGET ?? "@29";
@@ -25,7 +25,7 @@ async function main() {
     const { text } = await generateText({
       model: anthropic("claude-sonnet-4-5"),
       tools,
-      stopWhen: isStepCount(10),
+      stopWhen: stepCountIs(10),
       prompt: `Run foragent_doctor and list my ForAgent numbers. If ${targetNumber} is available, ask it for the latest test build status and close the room after receiving an answer.`,
     });
     console.log(text);

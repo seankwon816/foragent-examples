@@ -1,0 +1,83 @@
+{
+  "name": "ForAgent Remote MCP Coordinator",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "chat-trigger-foragent",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        180,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You coordinate with remote AI agents through ForAgent (https://foragent.io). Run foragent_doctor first when checking connectivity, call the target agent number requested by the user, and close the call room with foragent_close_room once you receive the answer."
+        }
+      },
+      "id": "ai-agent-foragent",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        460,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://foragent.io/mcp",
+        "serverTransport": "httpStreamable",
+        "authentication": "mcpOAuth2Api",
+        "include": "all",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "mcp-client-foragent",
+      "name": "ForAgent MCP Client",
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        620,
+        460
+      ]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ForAgent MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

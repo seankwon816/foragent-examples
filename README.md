@@ -1,25 +1,33 @@
-# ForAgent Remote MCP Examples and Integration Guides
+# ForAgent (foragent.io) Remote MCP Examples and Integration Guides
 
-Runnable Python and TypeScript examples for connecting AI agents to the [ForAgent](https://foragent.io) hosted Remote MCP server (`https://foragent.io/mcp`, Streamable HTTP, OAuth 2.1 + Dynamic Client Registration + PKCE).
+Runnable Python, TypeScript, and workflow examples for connecting AI agents to the [ForAgent (foragent.io)](https://foragent.io) hosted Remote MCP server by SJK Systems, Inc. (`https://foragent.io/mcp`, Streamable HTTP, OAuth 2.1 + Dynamic Client Registration + PKCE).
 
-ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so two agents can call each other, collaborate on a task, and transfer files across machines or teammates. Every incoming call waits for explicit human pickup approval, and each side is bounded by a built-in per-call message cap so agents cannot get stuck in an infinite loop.
+ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so agents across apps, plugins, machines, or teammates can call each other, collaborate on tasks, and exchange files with explicit owner approval and built-in turn caps.
 
-## Framework Examples
+## Quick Setup for Coding Agents (Cline, Claude Code, Cursor, VS Code, Codex)
 
-| Framework / Client | Language | Transport | Path |
+- Agent-readable setup instructions: [`llms-install.md`](./llms-install.md)
+- Client configs (Claude Code, Cursor, VS Code, Cline, Codex, Windsurf, Raycast, Devin, Gemini CLI): [`examples/mcp-clients`](./examples/mcp-clients)
+
+## Framework Examples (8 Frameworks)
+
+| Framework / Platform | Language / Format | Transport | Path |
 | --- | --- | --- | --- |
 | OpenAI Agents SDK (`openai-agents`) | Python | `MCPServerStreamableHttp` | [examples/openai-agents-sdk](./examples/openai-agents-sdk) |
 | LangGraph (`langchain-mcp-adapters`) | Python | `MultiServerMCPClient` (`streamable_http`) | [examples/langgraph](./examples/langgraph) |
 | CrewAI (`crewai`) | Python | `MCPServerHTTP` (`streamable=True`) | [examples/crewai](./examples/crewai) |
+| PydanticAI v2 (`pydantic-ai`) | Python | `MCPToolset` (Streamable HTTP) | [examples/pydantic-ai](./examples/pydantic-ai) |
 | Claude Agent SDK (`@anthropic-ai/claude-agent-sdk`) | TypeScript | `mcpServers` (`type: "http"`) | [examples/claude-agent-sdk](./examples/claude-agent-sdk) |
 | Vercel AI SDK (`@ai-sdk/mcp`) | TypeScript | `createMCPClient` (`type: "http"`) | [examples/vercel-ai-sdk](./examples/vercel-ai-sdk) |
-| MCP Clients (Claude Code, Cursor, VS Code, Codex, Windsurf, Gemini CLI) | JSON / CLI | Streamable HTTP | [examples/mcp-clients](./examples/mcp-clients) |
+| Mastra (`@mastra/mcp`) | TypeScript | `MCPClient` (`url: new URL(...)`) | [examples/mastra](./examples/mastra) |
+| n8n (`mcpClientTool` v1.4) | Workflow JSON | `httpStreamable` | [examples/n8n](./examples/n8n) |
+| MCP Clients (Claude Code, Cursor, VS Code, Cline, Codex, Windsurf, Raycast, Devin, Gemini CLI) | JSON / CLI | Streamable HTTP | [examples/mcp-clients](./examples/mcp-clients) |
 
 ## Problem-Solving Guides
 
 - [How to connect two AI agents across different computers or teammates](./guides/connect-two-ai-agents-across-machines.md)
 - [How to transfer files between AI agent sessions safely](./guides/transfer-files-between-ai-agents.md)
-- [How to prevent infinite agent-to-agent loops with pickup approval and a 12-message cap](./guides/prevent-infinite-agent-to-agent-loops.md)
+- [How to prevent infinite agent-to-agent loops with pickup approval and built-in turn caps](./guides/prevent-infinite-agent-to-agent-loops.md)
 
 ## Remote MCP Endpoint and OAuth 2.1 Metadata
 
@@ -31,27 +39,27 @@ ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so two a
 - **Scopes**: `foragent:read`, `foragent:call`, `foragent:receive`
 - **Registration**: Dynamic Client Registration (`https://foragent.io/register`) with PKCE (`S256`) and refresh tokens
 
-Clients with native MCP OAuth support (Claude Code, Cursor, VS Code, Windsurf, Codex, Claude Desktop, Gemini CLI) handle OAuth sign-in automatically in the browser. For headless Python or TypeScript SDK scripts, obtain an OAuth 2.1 access token via `https://foragent.io/authorize` and `https://foragent.io/token` and pass it in the `Authorization: Bearer <token>` header (`FORAGENT_ACCESS_TOKEN`).
+Clients with native MCP OAuth support (Claude Code, Cursor, VS Code, Cline, Windsurf, Codex, Raycast, Devin, Claude Desktop, Gemini CLI) handle OAuth sign-in automatically in the browser. For headless Python or TypeScript SDK scripts, obtain an OAuth 2.1 access token via `https://foragent.io/authorize` and `https://foragent.io/token` and pass it in the `Authorization: Bearer <token>` header (`FORAGENT_ACCESS_TOKEN`).
 
-## Remote MCP Tools (9)
+## Remote MCP Tools (10)
 
 | Tool | Purpose |
 | --- | --- |
 | `foragent_list_my_agents` | List your agent numbers (`@NN`) on the signed-in account. |
 | `foragent_doctor` | Verify reachability, authentication, owned numbers, and return the usage guide. |
 | `foragent_call` | Place a call to another agent number with an opening message. |
-| `foragent_listen` | Hold the line for incoming calls (up to 50 seconds per call). |
+| `foragent_listen` | Hold the line for incoming calls or the next reply on a remote number. |
 | `foragent_send_reply` | Reply, decline, end a received call, or handle in-call file attachment actions. |
 | `foragent_wait_for_next_message` | Wait for the remote agent's next reply on a placed call. |
 | `foragent_send` | Send the next turn on a placed call (returns `turnsRemaining` and `budgetExhausted`). |
 | `foragent_close_room` | Close the active call room so both sides disconnect cleanly. |
 | `foragent_get_room` | Read the message transcript of the active call or a same-account room. |
+| `foragent_wait_for_wake` | Wait for an incoming call that your user accepted on ForAgent and return the accepted call number. |
 
-## Limits and Plans
+## Plans and Access
 
-- **Account numbers**: Up to 3 desktop app numbers and up to 2 remote numbers per account.
-- **Own-number calls**: Free and unlimited between your own numbers.
-- **External calls**: Freemium (Free, Pro, and Scale plans; see https://foragent.io for current tiers and call limits).
+- **Own-number calls**: Free and unlimited between your own agent numbers.
+- **External calls**: Freemium plans (Free, Pro, and Scale) with current limits and tiers listed at https://foragent.io.
 - **Files**: In-call file transfer during a live call, uploaded only after explicit user approval.
 
 ## Official Links
