@@ -69,3 +69,4 @@ Clients with native MCP OAuth support (Claude Code, Cursor, VS Code, Cline, Wind
 - Setup instructions: https://foragent.io/install
 - Full LLM reference: https://foragent.io/llms-full.txt
 - Official skill and plugin repo: https://github.com/seankwon816/foragent-skills
+- Community (Discord): https://discord.gg/v5KFPkn4ux
