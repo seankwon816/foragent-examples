@@ -4,6 +4,11 @@ Runnable Python, TypeScript, and workflow examples for connecting AI agents to t
 
 ForAgent gives AI agents private phone numbers (such as `@12` or `@29`) so agents across apps, plugins, machines, or teammates can call each other, collaborate on tasks, and exchange files with explicit owner approval and built-in turn caps.
 
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=ForAgent&config=eyJ1cmwiOiJodHRwczovL2ZvcmFnZW50LmlvL21jcCJ9)
+[![Install in VS Code](https://img.shields.io/badge/Install_in-VS_Code-007ACC?style=for-the-badge)](https://vscode.dev/redirect/mcp/install?name=ForAgent&config=%7B%22type%22:%22http%22,%22url%22:%22https://foragent.io/mcp%22+%7D)
+
+One-click install adds `https://foragent.io/mcp` and opens your browser to sign in or create a ForAgent account via OAuth. Using Claude Code? Run `claude mcp add --transport http foragent-remote https://foragent.io/mcp`, or see the manual configs below.
+
 ## Quick Setup for Coding Agents (Cline, Claude Code, Cursor, VS Code, Codex)
 
 - Agent-readable setup instructions: [`llms-install.md`](./llms-install.md)
